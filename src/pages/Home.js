@@ -6,7 +6,7 @@ function Home() {
 
     useEffect(() => {
         const loadMovies = async () => {
-            const data = await fetchPopularMovies;
+            const data = await fetchPopularMovies();
             setMovies(data);
         };
 
@@ -16,9 +16,10 @@ function Home() {
     return (
         <div style={{padding: "20px"}}>
             <h1>Популярные фильмы</h1>
-            <div style={{display:"flex", flexWrap: "wrap", gap: "20px"}}>
+            <div 
+                style={{display:"flex", flexWrap: "wrap", gap: "20px"}}>
                 {movies.map(movie => (
-                <div key={movie.id} style={{width:"20px"}}>
+                <div key={movie.id} style={{width:"200px"}}>
                 <img
                     src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                     alt={movie.title}
