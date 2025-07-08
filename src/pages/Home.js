@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {fetchPopularMovies} from "../services/api";
+import MovieCard from '../components/MovieCard';
 
 function Home() {
     const [movies, setMovies] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
 
     useEffect(() => {
         const loadMovies = async () => {
@@ -16,17 +18,22 @@ function Home() {
     return (
         <div style={{padding: "20px"}}>
             <h1>Популярные фильмы</h1>
+            <input
+                type='text'
+                placeholder="Поиск по названию..."
+                value={searchQuery}
+                onChange={(e)=> setSearchQuery (e.target.value)}
+                style={{
+                    padding: '10px',
+                    marginBottom: '20px',
+                    width: '300px',
+                    fontSize: '16px'
+                }}
+            />
             <div 
                 style={{display:"flex", flexWrap: "wrap", gap: "20px"}}>
                 {movies.map(movie => (
-                <div key={movie.id} style={{width:"200px"}}>
-                <img
-                    src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                    alt={movie.title}
-                    style={{width: "100%"}}
-                />
-                <h3>{movie.title}</h3>
-            </div>
+                <MovieCard key={movie.id} movie={movie} />
             ))}
             </div>
         </div>

@@ -13,3 +13,16 @@ export const fetchPopularMovies = async () => {
         return [];
     }
 };
+
+export const searchMovie = async (query) => {
+    try {
+        const response = await fetch (
+            `${BASE_URL}/search/movie?api_key=${API_KEY}&language=ru-RU&query=${encodeURIComponent(query)}&page=1`
+        );
+        const data = await response.json();
+        return data.results;
+    } catch (error) {
+        console.error('Ошибка при поиске фильмов:', error);
+        return [];
+    }
+}
