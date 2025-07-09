@@ -5,16 +5,21 @@ import MovieCard from '../components/MovieCard';
 function Home() {
     const [movies, setMovies] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
+    const [isloading, setIsLoading] = useState (false);
 
     useEffect(() => {
         const loadMovies = async () => {
+            setIsLoading(true);
+        
             if (searchQuery.trim() === '') {
                 const data = await fetchPopularMovies();
                 setMovies(data);
             } else {
                 const data = await searchMovie(searchQuery);
-                setMovies(data)
+                setMovies(data);
             }
+
+            setIsLoading(false);
         };
 
         loadMovies();
@@ -35,12 +40,22 @@ function Home() {
                     fontSize: '16px'
                 }}
             />
-            <div 
-                style={{display:"flex", flexWrap: "wrap", gap: "20px"}}>
-                {movies.map(movie => (
-                <MovieCard key={movie.id} movie={movie} />
+
+            {isloading && (
+                <p style={{fontSize:"19px", color:'#999'}}>Загрузка...</p>
+            )}
+
+            {!isloading && movies.length === 0 ? (
+                <p style={{fontSize: '18px', color: '#666'}}>Фильмы не найдены 😔</p>
+            ) : (
+                <div
+                    style={{display:"flex", flexWrap: "wrap", gap: "20px"}}>
+                    {movies.map(movie => (
+                    <MovieCard key={movie.id} movie={movie} />
             ))}
             </div>
+            )
+            }
         </div>
     );
 }
