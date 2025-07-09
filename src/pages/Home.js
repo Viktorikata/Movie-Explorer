@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {fetchPopularMovies} from "../services/api";
+import {fetchPopularMovies, searchMovie} from "../services/api";
 import MovieCard from '../components/MovieCard';
 
 function Home() {
@@ -8,12 +8,17 @@ function Home() {
 
     useEffect(() => {
         const loadMovies = async () => {
-            const data = await fetchPopularMovies();
-            setMovies(data);
+            if (searchQuery.trim() === '') {
+                const data = await fetchPopularMovies();
+                setMovies(data);
+            } else {
+                const data = await searchMovie(searchQuery);
+                setMovies(data)
+            }
         };
 
         loadMovies();
-    }, []);
+    }, [searchQuery]);
 
     return (
         <div style={{padding: "20px"}}>

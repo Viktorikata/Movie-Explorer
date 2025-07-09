@@ -8,7 +8,7 @@ function MovieCard ({movie}) {
                 alt={movie.tittle}
                 style={{width:'100%', borderRadius: '10px'}}
             />
-            <h3>{movie.tittle}</h3>
+            <h3>{movie.title}</h3>
         </div>
     );
 }
