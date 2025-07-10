@@ -1,0 +1,12 @@
+.wrap {
+    padding: 15px;
+
+    background: #ffffff;
+}
+.page {
+    padding: 40px;
+    background: #ff8cff79;
+    min-height: 100vh;
+    font-family: ;
+    border-radius: 12px;
+}
