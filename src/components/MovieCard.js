@@ -1,7 +1,7 @@
 import React from 'react';
 import './MovieCard.css';
 
-function MovieCard ({movie}) {
+function MovieCard ({movie, isFavorite, onToggleFavorite}) {
     return (
         <div className="movie-card" style={{width: "200px"}}>
             <img 
@@ -11,6 +11,12 @@ function MovieCard ({movie}) {
             />
             <div className='movie-card-content'>
             <h3>{movie.title}</h3>
+            <button 
+                className={`favorite-btn ${isFavorite ? 'active' : ''}`}
+                onClick={()=> onToggleFavorite(movie)}
+            >
+                {isFavorite ? '✅ Убрать из избранного' : '⭐ В избранное'}
+            </button>
             </div>
         </div>
     );

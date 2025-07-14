@@ -7,6 +7,10 @@ function Home() {
     const [movies, setMovies] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const [isloading, setIsLoading] = useState (false);
+    const [favorites, setFavorites] = useState(() =>  {
+        const saved = localStorage.getItem('favorites');
+        return saved ? JSON.parse(saved) : [];
+    });
 
     useEffect(() => {
         const loadMovies = async () => {
@@ -26,6 +30,20 @@ function Home() {
         loadMovies();
     }, [searchQuery]);
 
+    const toggleFavorite = (movie) => {
+        const isFavorite = favorites.some(fav => fav.id === movie.id);
+
+        let updatedFavorites;
+        if (isFavorite) {
+            updatedFavorites = favorites.filter(fav => fav.id !== movie.id);
+        } else {
+            updatedFavorites = [...favorites, movie]
+        }
+
+        setFavorites (updatedFavorites);
+        localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+    };
+
     return (
         <div className='wrap'>
         <div className='page'>
@@ -36,7 +54,6 @@ function Home() {
                 value={searchQuery}
                 onChange={(e)=> setSearchQuery (e.target.value)}
                 className='search-input'
-                
             />
 
             {isloading && <p>Загрузка...</p>}
@@ -44,9 +61,13 @@ function Home() {
             {!isloading && movies.length === 0 ? (
                 <p style={{fontSize: '18px', color: '#666', textAlign: "center"}}>Фильмы не найдены 😔</p>
             ) : (
-                <div className='movie-grid'>
+                <div className='movies-grid'>
                     {movies.map(movie => (
-                    <MovieCard key={movie.id} movie={movie} />
+                    <MovieCard 
+                    key={movie.id} 
+                    movie={movie} 
+                    onToggleFavorite={toggleFavorite}
+                    isFavorite={favorites.some(fav => fav.id === movie.id)}/>
             ))}
             </div>
             )
