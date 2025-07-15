@@ -1,0 +1,29 @@
+.wrap {
+    padding: 15px;
+
+    background: #ffffff;
+}
+.page {
+    padding: 40px;
+    background: #ef81d9bf;
+    min-height: 100vh;
+    font-family: "Hachi Maru Pop", cursive;
+    font-weight: 200;
+    border-radius: 12px;
+}
+
+.page h1 {
+    font-size: 28px;
+    text-align: center;
+    color: #ffffff;
+    margin: 30px 0 60px 0;
+    font-weight: 800;
+    padding: 20px;
+}
+
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px));
+    gap: 24px;
+    align-items: stretch;
+}

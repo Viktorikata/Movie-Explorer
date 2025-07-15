@@ -2,7 +2,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    width: 200px;
+    width: 100%;
+    max-width: 200px;
     height: 100%;
     box-sizing: border-box;
     background-color: #fff;
@@ -64,4 +65,15 @@
     background-color: #ffc107;
     color: #000;
     border-color: #e0a800;
+}
+
+@media (max-width: 600px) {
+    .movie-card-content h3 {
+        font-size: 14px;
+    }
+
+    .favorite-btn {
+        font-size: 12px;
+        padding: 6px 8px;
+    }
 }

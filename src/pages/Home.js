@@ -45,6 +45,7 @@ function Home() {
     };
 
     return (
+        <div className='container'>
         <div className='wrap'>
         <div className='page'>
             <h1>Популярные фильмы</h1>
@@ -72,6 +73,7 @@ function Home() {
             </div>
             )
             }
+        </div>
         </div>
         </div>
     );
